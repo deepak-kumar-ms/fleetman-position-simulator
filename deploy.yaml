@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: position-simulator
-        image: 788000630483.dkr.ecr.us-east-1.amazonaws.com/fleetman-position-simulator:2
+        image: 788000630483.dkr.ecr.us-east-1.amazonaws.com/fleetman-position-simulator:3
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: production-microservice
