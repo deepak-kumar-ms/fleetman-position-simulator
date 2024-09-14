@@ -32,32 +32,7 @@ pipeline {
          }
       }
 
-         stage('Sonarqube Analysis') {
-            steps {
-				withSonarQubeEnv('sonar-server') {
-					sh '''
-					mvn clean verify sonar:sonar \
-					-Dsonar.projectKey=fleetman-position-simulator '''
-				}
-                
-            }
-        }
-
-        stage('Quality Check') {
-            steps {
-                script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token' 
-                }
-            }
-        }
-
-        // stage('OWASP Dependency-Check Scan') {
-        //     steps {
-        //         dependencyCheck additionalArguments: '--scan ./ --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
-        //         dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
-        //     }
-        // }
-
+         
         stage('Trivy File Scan') {
             steps {
                 sh 'trivy fs . > trivyfs.txt'
